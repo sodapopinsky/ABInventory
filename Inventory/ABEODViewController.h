@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface ABEODViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *fldBuns;
+@property (weak, nonatomic) IBOutlet UITextField *fldFulls;
+@property (weak, nonatomic) IBOutlet UITextField *fldSliderBuns;
+@property (weak, nonatomic) IBOutlet UITextField *fldSliders;
+
+@property (weak, nonatomic) IBOutlet UIButton *btnSave;
+- (IBAction)save:(id)sender;
 
 @end

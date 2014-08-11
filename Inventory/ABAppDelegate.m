@@ -7,14 +7,25 @@
 //
 
 #import "ABAppDelegate.h"
+#import "ABNavController.h"
+#import "ABRootViewController.h"
+#import <Parse/Parse.h>
+@interface ABAppDelegate()
+@property (nonatomic, retain) UINavigationController *navController;
 
+@end
 @implementation ABAppDelegate
-
+@synthesize navController;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
+    [Parse setApplicationId:@"lTfgcKzUPZjigInKO4e7VP8p81Wzb6Fe2dJy6UXV" clientKey:@"fAsaJ4b64t7GgEKFApLNUNDrgTA4NdKSmnOTgmCs"];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    ABRootViewController *rootView = [[ABRootViewController alloc] init];
+    navController = [[UINavigationController alloc] initWithRootViewController:rootView];
+    [self.window setRootViewController:navController];
     [self.window makeKeyAndVisible];
     return YES;
 }

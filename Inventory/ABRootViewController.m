@@ -7,6 +7,7 @@
 //
 
 #import "ABRootViewController.h"
+#import "ABEODViewController.h"
 
 @interface ABRootViewController ()
 
@@ -19,6 +20,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
     }
     return self;
 }
@@ -26,9 +28,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIButton *goEOD = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [goEOD setTitle:@"End of Day Inventory" forState:UIControlStateNormal];
+    [goEOD setFrame:CGRectMake(50, 100, 150, 50)];
+   
+    [goEOD addTarget:self action:@selector(goEOD) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:goEOD];
+    
     // Do any additional setup after loading the view.
 }
-
+-(void)goEOD{
+    ABEODViewController *eodVC = [[ABEODViewController alloc] initWithNibName:@"ABEODViewController" bundle:nil];
+    [self.navigationController pushViewController:eodVC animated:YES];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

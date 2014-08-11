@@ -7,7 +7,7 @@
 //
 
 #import "ABEODViewController.h"
-
+#import <Parse/Parse.h>
 @interface ABEODViewController ()
 
 @end
@@ -33,6 +33,17 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)save:(id)sender{
+    
+    PFObject *bunsFull = [PFObject objectWithoutDataWithClassName:@"items"
+                                                       objectId:@"g3c7M4EbY3"];
+    PFObject *saveEntries = [PFObject objectWithClassName:@"entries"];
+    [saveEntries setObject:bunsFull forKey:@"item"];
+    NSNumber *c = [NSNumber numberWithInt:5];
+    [saveEntries setObject:c forKey:@"count"];
+    [saveEntries saveEventually];
 }
 
 @end

@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Atomic Burger. All rights reserved.
 //
 
-#import "ABViewController.h"
+#import "ABNavController.h"
 
-@interface ABViewController ()
+@interface ABNavController ()
 
 @end
 
-@implementation ABViewController
+@implementation ABNavController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
