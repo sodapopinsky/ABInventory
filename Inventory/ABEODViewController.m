@@ -27,7 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
- 
+ self.title = @"EOD Inventory";
     [fldBuns becomeFirstResponder];
     
     fldBuns.delegate = self;
