@@ -28,11 +28,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"Atomic Burger Inventory"];
+    [self setTitle:@"Atomic Burger"];
+    
+    UIImageView *inventoryImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"inventoryIcon"]];
+    inventoryImage.contentMode = UIViewContentModeScaleAspectFit;
+    [inventoryImage setFrame:CGRectMake(30, 100, 50, 50)];
+    [self.view addSubview:inventoryImage];
     UIButton *goEOD = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [goEOD setTitle:@"End of Day Inventory" forState:UIControlStateNormal];
     [goEOD.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
-    [goEOD setFrame:CGRectMake(50, 200, 300, 50)];
+    [goEOD setFrame:CGRectMake(70, 105, 300, 50)];
    
     [goEOD addTarget:self action:@selector(goEOD) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goEOD];
