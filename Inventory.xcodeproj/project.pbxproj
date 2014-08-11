@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		013DD33119994E5300D26342 /* ABConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DD33019994E5300D26342 /* ABConstants.m */; };
 		016000611997D2BA00F0DBC3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016000601997D2BA00F0DBC3 /* Foundation.framework */; };
 		016000631997D2BA00F0DBC3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016000621997D2BA00F0DBC3 /* CoreGraphics.framework */; };
 		016000651997D2BA00F0DBC3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016000641997D2BA00F0DBC3 /* UIKit.framework */; };
@@ -45,6 +46,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		013DD32F19994E5300D26342 /* ABConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABConstants.h; sourceTree = "<group>"; };
+		013DD33019994E5300D26342 /* ABConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABConstants.m; sourceTree = "<group>"; };
+		013DD33519995BA800D26342 /* icon */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon; sourceTree = "<group>"; };
 		0160005D1997D2BA00F0DBC3 /* Inventory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inventory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016000601997D2BA00F0DBC3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		016000621997D2BA00F0DBC3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -115,6 +119,7 @@
 		016000541997D2BA00F0DBC3 = {
 			isa = PBXGroup;
 			children = (
+				013DD33519995BA800D26342 /* icon */,
 				0160009A1997D74700F0DBC3 /* External */,
 				016000661997D2BA00F0DBC3 /* Inventory */,
 				0160007F1997D2BA00F0DBC3 /* InventoryTests */,
@@ -164,6 +169,8 @@
 				016000B41997EA1100F0DBC3 /* ABEODViewController.h */,
 				016000B51997EA1100F0DBC3 /* ABEODViewController.m */,
 				016000B61997EA1100F0DBC3 /* ABEODViewController.xib */,
+				013DD32F19994E5300D26342 /* ABConstants.h */,
+				013DD33019994E5300D26342 /* ABConstants.m */,
 			);
 			path = Inventory;
 			sourceTree = "<group>";
@@ -263,6 +270,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Atomic Burger";
 				TargetAttributes = {
+					0160005C1997D2BA00F0DBC3 = {
+						DevelopmentTeam = LE78HT2BQ6;
+					};
 					016000771997D2BA00F0DBC3 = {
 						TestTargetID = 0160005C1997D2BA00F0DBC3;
 					};
@@ -312,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				013DD33119994E5300D26342 /* ABConstants.m in Sources */,
 				0160006D1997D2BA00F0DBC3 /* main.m in Sources */,
 				016000911997D33C00F0DBC3 /* ABNavController.m in Sources */,
 				016000B71997EA1100F0DBC3 /* ABEODViewController.m in Sources */,
@@ -436,6 +447,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -444,6 +457,7 @@
 				GCC_PREFIX_HEADER = "Inventory/Inventory-Prefix.pch";
 				INFOPLIST_FILE = "Inventory/Inventory-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -453,6 +467,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -461,6 +477,7 @@
 				GCC_PREFIX_HEADER = "Inventory/Inventory-Prefix.pch";
 				INFOPLIST_FILE = "Inventory/Inventory-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

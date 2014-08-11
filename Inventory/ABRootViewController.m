@@ -28,10 +28,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self setTitle:@"Atomic Burger Inventory"];
     UIButton *goEOD = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [goEOD setTitle:@"End of Day Inventory" forState:UIControlStateNormal];
-    [goEOD setFrame:CGRectMake(50, 100, 150, 50)];
+    [goEOD.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
+    [goEOD setFrame:CGRectMake(50, 200, 300, 50)];
    
     [goEOD addTarget:self action:@selector(goEOD) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goEOD];

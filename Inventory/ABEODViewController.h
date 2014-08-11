@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ABEODViewController : UIViewController
+@interface ABEODViewController : UIViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *fldBuns;
 @property (weak, nonatomic) IBOutlet UITextField *fldFulls;
 @property (weak, nonatomic) IBOutlet UITextField *fldSliderBuns;
