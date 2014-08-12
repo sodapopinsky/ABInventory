@@ -31,7 +31,7 @@
     [fldBuns becomeFirstResponder];
     
     fldBuns.delegate = self;
-       fldSliderBuns.delegate = self;
+    fldSliderBuns.delegate = self;
        fldSliders.delegate = self;
        fldFulls.delegate = self;
     

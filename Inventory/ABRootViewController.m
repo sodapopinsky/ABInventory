@@ -8,7 +8,7 @@
 
 #import "ABRootViewController.h"
 #import "ABEODViewController.h"
-
+#import "ABMeatPrepChecklist.h"
 @interface ABRootViewController ()
 
 @end
@@ -34,6 +34,7 @@
     inventoryImage.contentMode = UIViewContentModeScaleAspectFit;
     [inventoryImage setFrame:CGRectMake(30, 100, 50, 50)];
     [self.view addSubview:inventoryImage];
+    
     UIButton *goEOD = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [goEOD setTitle:@"End of Day Inventory" forState:UIControlStateNormal];
     [goEOD.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
@@ -42,11 +43,23 @@
     [goEOD addTarget:self action:@selector(goEOD) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goEOD];
     
+    
+    UIButton *goMeatPrep = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [goMeatPrep setTitle:@"Meat Prep Checklist" forState:UIControlStateNormal];
+    [goMeatPrep.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
+    [goMeatPrep setFrame:CGRectMake(70, 155, 300, 50)];
+    
+    [goMeatPrep addTarget:self action:@selector(goMeatPrep) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:goMeatPrep];
     // Do any additional setup after loading the view.
 }
 -(void)goEOD{
     ABEODViewController *eodVC = [[ABEODViewController alloc] initWithNibName:@"ABEODViewController" bundle:nil];
     [self.navigationController pushViewController:eodVC animated:YES];
+}
+-(void)goMeatPrep{
+    ABMeatPrepChecklist *mpcl = [[ABMeatPrepChecklist alloc] initWithNibName:@"ABMeatPrepChecklist" bundle:nil];
+    [self.navigationController pushViewController:mpcl animated:YES];
 }
 - (void)didReceiveMemoryWarning
 {
