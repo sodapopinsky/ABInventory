@@ -10,17 +10,24 @@
 
 
 @interface ABMeatPrepChecklist ()
-
+@property (nonatomic,strong) NSNumber *fullPar;
+@property (nonatomic,strong) NSNumber *sliderPar;
+@property (nonatomic,strong) NSNumber *turkeyPar;
 @end
 
 @implementation ABMeatPrepChecklist
-@synthesize lblDate, txtFullCount, txtSliderCount,txtTurkeyCount, lblParValues, lblTurkeyPar;
+@synthesize lblDate, txtFullCount, txtSliderCount,txtTurkeyCount, lblBeefNeeded, lblTurkeyNeeded, fullPar, sliderPar, turkeyPar, lblTurkeyPar, lblSliderPar, lblFullPar;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
- 
+        NSMutableDictionary *values = [self getTodaysParValues];
+        
+        
+        fullPar = [values objectForKey:@"Full"];
+        sliderPar = [values objectForKey:@"Slider"];
+        turkeyPar = [values objectForKey:@"Turkey"];
     }
     return self;
 }
@@ -34,6 +41,9 @@
     NSString *dateString = [formatted stringFromDate:today];
     
     [lblDate setText:dateString];
+    [lblFullPar setText:[NSString stringWithFormat:@"%@",fullPar]];
+    [lblSliderPar setText:[NSString stringWithFormat:@"%@",sliderPar]];
+    [lblTurkeyPar setText:[NSString stringWithFormat:@"%@",turkeyPar]];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -45,16 +55,11 @@
 
 - (IBAction)calculatePar:(id)sender {
     if(txtFullCount.text.length == 0 || txtSliderCount.text.length == 0 || txtTurkeyCount.text.length == 0){
-        [lblParValues setText:@"All counts must be filled out"];
+        [lblBeefNeeded setText:@"All counts must be filled out"];
         return;
     }
     
-   NSMutableDictionary *values = [self getTodaysParValues];
-   
-    
-    NSNumber *fullPar = [values objectForKey:@"Full"];
-    NSNumber *sliderPar = [values objectForKey:@"Slider"];
-      NSNumber *turkeyPar = [values objectForKey:@"Turkey"];
+
     //Ounces
     double currentWeight = [txtFullCount.text doubleValue] * 5 + [txtSliderCount.text doubleValue] * 1.75;
     double parWeight = [fullPar doubleValue] * 5 + [sliderPar doubleValue] * 1.75;
@@ -65,8 +70,8 @@
     int sliderNeeded = [sliderPar intValue] - [txtSliderCount.text intValue];
     int turkeyNeeded = [turkeyPar intValue] - [txtTurkeyCount.text intValue];
     double chucksNeeded = (lbsNeeded * 1.03) / 24; //for 3% waste
-    [lblParValues setText:[NSString stringWithFormat:@"Fulls:%i, Sliders:%i, Chucks: %f",fullNeeded, sliderNeeded, chucksNeeded]];
-    [lblTurkeyPar setText:[NSString stringWithFormat:@"Turkeys: %i", turkeyNeeded]];
+    [lblBeefNeeded setText:[NSString stringWithFormat:@"Fulls:%i, Sliders:%i, Chucks: %f",fullNeeded, sliderNeeded, chucksNeeded]];
+    [lblTurkeyNeeded setText:[NSString stringWithFormat:@"Turkeys: %i", turkeyNeeded]];
     
 }
 -(NSMutableDictionary*)getTodaysParValues{

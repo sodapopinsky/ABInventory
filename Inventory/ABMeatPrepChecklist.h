@@ -12,12 +12,28 @@
 
 @interface ABMeatPrepChecklist : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *lblDate;
+@property (weak, nonatomic) IBOutlet UILabel *lblFullPar;
+@property (weak, nonatomic) IBOutlet UILabel *lblSliderPar;
+@property (weak, nonatomic) IBOutlet UILabel *lblTurkeyPar;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtFullCount;
 @property (weak, nonatomic) IBOutlet UITextField *txtSliderCount;
 @property (weak, nonatomic) IBOutlet UITextField *txtTurkeyCount;
-@property (weak, nonatomic) IBOutlet UILabel *lblParValues;
-@property (weak, nonatomic) IBOutlet UILabel *lblTurkeyPar;
+@property (weak, nonatomic) IBOutlet UILabel *lblBeefNeeded;
+@property (weak, nonatomic) IBOutlet UILabel *lblTurkeyNeeded;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblChuckWeight;
+@property (weak, nonatomic) IBOutlet UITextField *txtChuckWeightCut;
+@property (weak, nonatomic) IBOutlet UITextField *txtFullMade;
+@property (weak, nonatomic) IBOutlet UITextField *txtSliderMade;
+@property (weak, nonatomic) IBOutlet UITextField *txtTurkeyMade;
+@property (weak, nonatomic) IBOutlet UITextField *txtEmployeeSignature;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblFullNeeded;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblSliderNeeded;
+
+
 
 - (IBAction)calculatePar:(id)sender;
 
