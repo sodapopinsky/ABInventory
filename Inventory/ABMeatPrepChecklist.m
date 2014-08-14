@@ -7,16 +7,19 @@
 //
 
 #import "ABMeatPrepChecklist.h"
-
+#import "MBProgressHUD.h"
 
 @interface ABMeatPrepChecklist ()
 @property (nonatomic,strong) NSNumber *fullPar;
 @property (nonatomic,strong) NSNumber *sliderPar;
 @property (nonatomic,strong) NSNumber *turkeyPar;
+
+@property (nonatomic, strong) MBProgressHUD *hud;
+
 @end
 
 @implementation ABMeatPrepChecklist
-@synthesize lblDate, txtFullCount, txtSliderCount,txtTurkeyCount, lblBeefNeeded, lblTurkeyNeeded, fullPar, sliderPar, turkeyPar, lblTurkeyPar, lblSliderPar, lblFullPar;
+@synthesize lblDate, viewSaved, txtFullCount, txtSliderCount,txtTurkeyCount, lblBeefNeeded, lblTurkeyNeeded, fullPar, sliderPar, turkeyPar, lblTurkeyPar, lblSliderPar, lblFullPar, lblFullNeeded, lblSliderNeeded, isSaved, txtChuckWeightCut, txtFullMade, txtSliderMade,txtTurkeyMade, txtEmployeeSignature, errAllFields, lblIsSaved, instanceDate, hud;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -24,33 +27,98 @@
         // Custom initialization
         NSMutableDictionary *values = [self getTodaysParValues];
         
-        
+        isSaved = NO;
         fullPar = [values objectForKey:@"Full"];
         sliderPar = [values objectForKey:@"Slider"];
         turkeyPar = [values objectForKey:@"Turkey"];
+        instanceDate = [NSDate date];
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+-(void)viewWillAppear:(BOOL)animated {
     NSDateFormatter *formatted = [[NSDateFormatter alloc] init];
     [formatted setDateFormat:@"MM/dd/yyyy"];
     NSDate *today = [NSDate date];
     NSString *dateString = [formatted stringFromDate:today];
     
     [lblDate setText:dateString];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [txtFullCount becomeFirstResponder];
+   
     [lblFullPar setText:[NSString stringWithFormat:@"%@",fullPar]];
     [lblSliderPar setText:[NSString stringWithFormat:@"%@",sliderPar]];
     [lblTurkeyPar setText:[NSString stringWithFormat:@"%@",turkeyPar]];
+    self.title = @"Meat Log";
+    
+    for (UIView *view in [self.view subviews]) {
+        if ([view isKindOfClass:[UITextField class]]) {
+ 
+         
+            UITextField *textField = (UITextField *)view;
+            textField.delegate = self;
+            [textField setKeyboardType:UIKeyboardTypeNumberPad];
+        }
+    }
+    
+    [txtEmployeeSignature setKeyboardType:UIKeyboardTypeDefault];
+    txtEmployeeSignature.delegate = nil;
+    
     // Do any additional setup after loading the view from its nib.
 }
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    // Check for non-numeric characters
+    NSUInteger lengthOfString = string.length;
+    for (NSInteger index = 0; index < lengthOfString; index++) {
+        unichar character = [string characterAtIndex:index];
+        if (character < 48) return NO; // 48 unichar for 0
+        if (character > 57) return NO; // 57 unichar for 9
+    }
+    // Check for total length
+    NSUInteger proposedNewLength = textField.text.length - range.length + string.length;
+    if (proposedNewLength > 6)
+        return YES;
+    return YES;
+}
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)save:(id)sender {
+
+    if(txtTurkeyMade.text.length <= 0 || txtSliderMade.text.length <= 0 || txtFullMade.text.length <= 0 || txtChuckWeightCut.text.length <= 0 ){
+        errAllFields.hidden = NO;
+        return;
+    }
+     errAllFields.hidden = YES;
+    PFObject *saveEntries = [PFObject objectWithClassName:@"meatLog"];
+
+    [saveEntries setObject:[NSNumber numberWithInt:[txtChuckWeightCut.text intValue]] forKey:kABMeatLogChuckWeight];
+     [saveEntries setObject:[NSNumber numberWithInt:[txtFullMade.text intValue]] forKey:kABMeatLogFullsMade];
+      [saveEntries setObject:[NSNumber numberWithInt:[txtSliderMade.text intValue]] forKey:kABMeatLogSlidersMade];
+       [saveEntries setObject:[NSNumber numberWithInt:[txtTurkeyMade.text intValue]]  forKey:kABMeatLogTurkeysMade];
+     
+    
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.labelText = NSLocalizedString(@"Saving", nil);
+    self.hud.dimBackground = NO;
+    [saveEntries saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [self.hud hide:YES];
+        viewSaved.hidden = NO;
+        isSaved = YES;
+        [self.navigationController popToRootViewControllerAnimated:YES];
+       
+    }];
+    
 }
 
 - (IBAction)calculatePar:(id)sender {
@@ -70,8 +138,11 @@
     int sliderNeeded = [sliderPar intValue] - [txtSliderCount.text intValue];
     int turkeyNeeded = [turkeyPar intValue] - [txtTurkeyCount.text intValue];
     double chucksNeeded = (lbsNeeded * 1.03) / 24; //for 3% waste
-    [lblBeefNeeded setText:[NSString stringWithFormat:@"Fulls:%i, Sliders:%i, Chucks: %f",fullNeeded, sliderNeeded, chucksNeeded]];
-    [lblTurkeyNeeded setText:[NSString stringWithFormat:@"Turkeys: %i", turkeyNeeded]];
+    [lblBeefNeeded setText:[NSString stringWithFormat:@"Chucks: %f", chucksNeeded]];
+    
+    [lblFullNeeded setText:[NSString stringWithFormat:@"/ %i",fullNeeded]];
+    [lblSliderNeeded setText:[NSString stringWithFormat:@"/ %i",sliderNeeded]];
+    [lblTurkeyNeeded setText:[NSString stringWithFormat:@"/ %i",turkeyNeeded]];
     
 }
 -(NSMutableDictionary*)getTodaysParValues{

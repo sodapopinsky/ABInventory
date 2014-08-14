@@ -10,17 +10,19 @@
 #import "ABEODViewController.h"
 #import "ABMeatPrepChecklist.h"
 @interface ABRootViewController ()
-
+@property (nonatomic, strong) ABMeatPrepChecklist *meatPrepChecklist;
+@property (nonatomic, strong) ABEODViewController *EODInventory;
 @end
 
 @implementation ABRootViewController
-
+@synthesize meatPrepChecklist, lblCurrentDate, EODInventory;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
+        meatPrepChecklist = [[ABMeatPrepChecklist alloc]  initWithNibName:@"ABMeatPrepChecklist" bundle:nil];
+        EODInventory = [[ABEODViewController alloc]  initWithNibName:@"ABEODViewController" bundle:nil];
     }
     return self;
 }
@@ -30,41 +32,49 @@
     [super viewDidLoad];
     [self setTitle:@"Atomic Burger"];
     
-    UIImageView *inventoryImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"inventoryIcon"]];
-    inventoryImage.contentMode = UIViewContentModeScaleAspectFit;
-    [inventoryImage setFrame:CGRectMake(30, 100, 50, 50)];
-    [self.view addSubview:inventoryImage];
-    
-    UIButton *goEOD = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [goEOD setTitle:@"End of Day Inventory" forState:UIControlStateNormal];
-    [goEOD.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
-    [goEOD setFrame:CGRectMake(70, 105, 300, 50)];
-   
-    [goEOD addTarget:self action:@selector(goEOD) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:goEOD];
-    
-    
-    UIButton *goMeatPrep = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [goMeatPrep setTitle:@"Meat Prep Checklist" forState:UIControlStateNormal];
-    [goMeatPrep.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
-    [goMeatPrep setFrame:CGRectMake(70, 155, 300, 50)];
-    
-    [goMeatPrep addTarget:self action:@selector(goMeatPrep) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:goMeatPrep];
-    // Do any additional setup after loading the view.
+
 }
--(void)goEOD{
-    ABEODViewController *eodVC = [[ABEODViewController alloc] initWithNibName:@"ABEODViewController" bundle:nil];
-    [self.navigationController pushViewController:eodVC animated:YES];
-}
--(void)goMeatPrep{
-    ABMeatPrepChecklist *mpcl = [[ABMeatPrepChecklist alloc] initWithNibName:@"ABMeatPrepChecklist" bundle:nil];
-    [self.navigationController pushViewController:mpcl animated:YES];
+-(void)viewWillAppear:(BOOL)animated{
+    NSDateFormatter *formatted = [[NSDateFormatter alloc] init];
+    [formatted setDateFormat:@"MM/dd/yyyy"];
+    NSDate *today = [NSDate date];
+    NSString *dateString = [formatted stringFromDate:today];
+    [lblCurrentDate setText:dateString];
+    
+    [self.checkMarkMeatPrep setImage:[UIImage imageNamed:@"checkMarkGray"]];
+    if(meatPrepChecklist.isSaved){
+        NSComparisonResult comp = [self compareDateOnly:meatPrepChecklist.instanceDate];
+        if(comp == NSOrderedSame){
+            [self.checkMarkMeatPrep setImage:[UIImage imageNamed:@"checkMark"]];
+        }
+    }
+    
+    [self.checkMarkEOD setImage:[UIImage imageNamed:@"checkMarkGray"]];
+    if(EODInventory.isSaved){
+        NSComparisonResult comp = [self compareDateOnly:EODInventory.instanceDate];
+        if(comp == NSOrderedSame){
+            [self.checkMarkEOD setImage:[UIImage imageNamed:@"checkMark"]];
+        }
+    }
+    
+    
 }
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSComparisonResult)compareDateOnly:(NSDate *)otherDate {
+    NSUInteger dateFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;
+    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] ;
+    NSDateComponents *selfComponents = [gregorianCalendar components:dateFlags fromDate:[NSDate date]];
+    NSDate *selfDateOnly = [gregorianCalendar dateFromComponents:selfComponents];
+    
+    NSDateComponents *otherCompents = [gregorianCalendar components:dateFlags fromDate:otherDate];
+    NSDate *otherDateOnly = [gregorianCalendar dateFromComponents:otherCompents];
+
+    return [selfDateOnly compare:otherDateOnly];
 }
 
 /*
@@ -77,5 +87,39 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)goEndOfDay:(id)sender {
+    
+    NSComparisonResult comp = [self compareDateOnly:EODInventory.instanceDate];
+    
+    if(comp == NSOrderedSame){
+        [self.navigationController pushViewController:EODInventory animated:YES];
+        
+        
+        return;
+    }
+    
+   EODInventory = nil;
+   EODInventory = [[ABEODViewController alloc] initWithNibName:@"ABEODViewController" bundle:nil];
+    [self.navigationController pushViewController:EODInventory animated:YES];
+    
+    
+
+}
+
+- (IBAction)goMeatPrep:(id)sender {
+    
+    NSComparisonResult comp = [self compareDateOnly:meatPrepChecklist.instanceDate];
+    
+    if(comp == NSOrderedSame){
+        [self.navigationController pushViewController:meatPrepChecklist animated:YES];
+        return;
+    }
+    
+    meatPrepChecklist = nil;
+    meatPrepChecklist = [[ABMeatPrepChecklist alloc] initWithNibName:@"ABMeatPrepChecklist" bundle:nil];
+    [self.navigationController pushViewController:meatPrepChecklist animated:YES];
+}
+
 
 @end

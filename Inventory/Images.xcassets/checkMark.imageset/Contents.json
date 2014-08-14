@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "inventoryIcon.png"
+      "filename" : "checkMarkGreen.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "inventoryIcon-1.png"
+      "filename" : "checkMarkGreen-1.png"
     }
   ],
   "info" : {

@@ -10,6 +10,8 @@
 		013947D31999832100C9ED60 /* ABMeatPrepChecklist.m in Sources */ = {isa = PBXBuildFile; fileRef = 013947D11999832100C9ED60 /* ABMeatPrepChecklist.m */; };
 		013947D41999832100C9ED60 /* ABMeatPrepChecklist.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013947D21999832100C9ED60 /* ABMeatPrepChecklist.xib */; };
 		013947D7199989BB00C9ED60 /* ABCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 013947D6199989BB00C9ED60 /* ABCache.m */; };
+		013947DB199D09E700C9ED60 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 013947DA199D09E700C9ED60 /* MBProgressHUD.m */; };
+		013947DD199D18C900C9ED60 /* ABRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013947DC199D18C900C9ED60 /* ABRootViewController.xib */; };
 		013DD33119994E5300D26342 /* ABConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DD33019994E5300D26342 /* ABConstants.m */; };
 		016000611997D2BA00F0DBC3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016000601997D2BA00F0DBC3 /* Foundation.framework */; };
 		016000631997D2BA00F0DBC3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016000621997D2BA00F0DBC3 /* CoreGraphics.framework */; };
@@ -54,6 +56,9 @@
 		013947D21999832100C9ED60 /* ABMeatPrepChecklist.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ABMeatPrepChecklist.xib; sourceTree = "<group>"; };
 		013947D5199989BB00C9ED60 /* ABCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCache.h; sourceTree = "<group>"; };
 		013947D6199989BB00C9ED60 /* ABCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCache.m; sourceTree = "<group>"; };
+		013947D9199D09E700C9ED60 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		013947DA199D09E700C9ED60 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		013947DC199D18C900C9ED60 /* ABRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ABRootViewController.xib; sourceTree = "<group>"; };
 		013DD32F19994E5300D26342 /* ABConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABConstants.h; sourceTree = "<group>"; };
 		013DD33019994E5300D26342 /* ABConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABConstants.m; sourceTree = "<group>"; };
 		013DD33519995BA800D26342 /* icon */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon; sourceTree = "<group>"; };
@@ -124,6 +129,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		013947D8199D09CB00C9ED60 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				013947D9199D09E700C9ED60 /* MBProgressHUD.h */,
+				013947DA199D09E700C9ED60 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		016000541997D2BA00F0DBC3 = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +188,7 @@
 				016000901997D33C00F0DBC3 /* ABNavController.m */,
 				016000921997D3EA00F0DBC3 /* ABRootViewController.h */,
 				016000931997D3EA00F0DBC3 /* ABRootViewController.m */,
+				013947DC199D18C900C9ED60 /* ABRootViewController.xib */,
 				016000B41997EA1100F0DBC3 /* ABEODViewController.h */,
 				016000B51997EA1100F0DBC3 /* ABEODViewController.m */,
 				016000B61997EA1100F0DBC3 /* ABEODViewController.xib */,
@@ -220,6 +235,7 @@
 		0160009A1997D74700F0DBC3 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				013947D8199D09CB00C9ED60 /* MBProgressHUD */,
 				0160009F1997D7B100F0DBC3 /* Parse.framework */,
 				0160009B1997D74F00F0DBC3 /* Reachability */,
 			);
@@ -316,6 +332,7 @@
 			files = (
 				0160006B1997D2BA00F0DBC3 /* InfoPlist.strings in Resources */,
 				016000731997D2BA00F0DBC3 /* Images.xcassets in Resources */,
+				013947DD199D18C900C9ED60 /* ABRootViewController.xib in Resources */,
 				016000B81997EA1100F0DBC3 /* ABEODViewController.xib in Resources */,
 				013947D41999832100C9ED60 /* ABMeatPrepChecklist.xib in Resources */,
 			);
@@ -343,6 +360,7 @@
 				016000B71997EA1100F0DBC3 /* ABEODViewController.m in Sources */,
 				016000711997D2BA00F0DBC3 /* ABAppDelegate.m in Sources */,
 				016000941997D3EA00F0DBC3 /* ABRootViewController.m in Sources */,
+				013947DB199D09E700C9ED60 /* MBProgressHUD.m in Sources */,
 				013947D7199989BB00C9ED60 /* ABCache.m in Sources */,
 				016000A31997D7C300F0DBC3 /* Reachability.m in Sources */,
 			);

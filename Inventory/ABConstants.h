@@ -30,14 +30,7 @@ typedef NS_ENUM(int, dailyParValues){
     saturdaySlider = 140,
     saturdayTurkey = 70
 };
-/*
- monday, tuesday 350 75 50
- wed 425 85 50
- thurs 450 100 50
- fri 600 100 60
- sat 600 140 70
- sun 550 120 70
- */
+
 
 //Parse ObjectIDs
 extern NSString *const kABSliderBuns;
@@ -46,4 +39,9 @@ extern NSString *const kABSliderPatty;
 extern NSString *const kABFullPatty;
 
 
+//MeatLogClass
+NSString *const kABMeatLogChuckWeight;
+NSString *const kABMeatLogFullsMade;
+NSString *const kABMeatLogSlidersMade;
+NSString *const kABMeatLogTurkeysMade;
 

@@ -1,4 +1,4 @@
-//
+    //
 //  ABMeatPrepChecklist.h
 //  Inventory
 //
@@ -10,7 +10,11 @@
 #import "ABCache.h"
 
 
-@interface ABMeatPrepChecklist : UIViewController
+@interface ABMeatPrepChecklist : UIViewController <UITextFieldDelegate>
+@property (nonatomic, strong) NSDate *instanceDate;
+@property BOOL isSaved;
+@property (weak, nonatomic) IBOutlet UILabel *lblIsSaved;
+
 @property (weak, nonatomic) IBOutlet UILabel *lblDate;
 @property (weak, nonatomic) IBOutlet UILabel *lblFullPar;
 @property (weak, nonatomic) IBOutlet UILabel *lblSliderPar;
@@ -33,7 +37,10 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *lblSliderNeeded;
 
+@property (weak, nonatomic) IBOutlet UILabel *errAllFields;
+- (IBAction)save:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIView *viewSaved;
 
 - (IBAction)calculatePar:(id)sender;
 

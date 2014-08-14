@@ -9,17 +9,22 @@
 #import "ABEODViewController.h"
 #import <Parse/Parse.h>
 #import "ABConstants.h"
-@interface ABEODViewController ()
+#import "MBProgressHUD.h"
 
+@interface ABEODViewController ()
+@property (nonatomic, strong) MBProgressHUD *hud;
 @end
 
 @implementation ABEODViewController
-@synthesize fldBuns, fldSliderBuns, fldSliders, fldFulls;
+
+@synthesize lblInstanceDate, fldBuns, fldSliderBuns, fldSliders, fldFulls, isSaved, instanceDate, hud, txtEmployee, lblErrFields, viewSaved;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        isSaved = NO;
+        instanceDate = [NSDate date];
     }
     return self;
 }
@@ -50,6 +55,12 @@
 
 - (IBAction)save:(id)sender{
   
+    
+    if([fldBuns.text length] <= 0 || [fldSliderBuns.text length] <= 0 || [fldSliders.text length] <= 0 || [fldFulls.text length] <= 0 || [txtEmployee.text length] <= 0 ){
+        lblErrFields.hidden = NO;
+        return;
+    }
+    
     NSMutableDictionary *itemsDictionary = [[NSMutableDictionary alloc] init];
     
 
@@ -60,18 +71,29 @@
     [itemsDictionary setObject:[NSNumber numberWithInt:[fldBuns.text intValue]] forKey:kABFullBuns];
     
     [itemsDictionary setObject:[NSNumber numberWithInt:[fldFulls.text intValue]] forKey:kABFullPatty];
-
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.labelText = NSLocalizedString(@"Saving", nil);
+    self.hud.dimBackground = NO;
  
    for (NSString* key in itemsDictionary) {
        PFObject *saveEntries = [PFObject objectWithClassName:@"entries"];
        [saveEntries setObject:[PFObject objectWithoutDataWithClassName:@"items"
                                                               objectId:key] forKey:@"item"];
         [saveEntries setObject:[itemsDictionary objectForKey:key] forKey:@"count"];
+   
+       
+   
        [saveEntries saveEventually];
+
+       
+     
+       
        
     }
-   
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    viewSaved.hidden = NO;
+    isSaved = YES;
+    [self.hud hide:YES];
+   [self.navigationController popToRootViewControllerAnimated:YES];
  
 }
 
@@ -90,5 +112,18 @@
     return YES;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    lblErrFields.hidden = YES;
+    
+
+        NSDateFormatter *formatted = [[NSDateFormatter alloc] init];
+        [formatted setDateFormat:@"MM/dd/yyyy"];
+        NSDate *today = [NSDate date];
+        NSString *dateString = [formatted stringFromDate:today];
+        
+        [lblInstanceDate setText:dateString];
+    
+    
+}
 
 @end
