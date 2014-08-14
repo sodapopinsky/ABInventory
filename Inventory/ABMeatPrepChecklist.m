@@ -152,39 +152,43 @@
     NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
     int weekday = [comps weekday];
     
-
+   
     switch(weekday){
-        case 0:
+        case 1:
             [values setObject:[NSNumber numberWithInt:sundayFull]  forKey:@"Full"];
             [values setObject:[NSNumber numberWithInt:sundaySlider]  forKey:@"Slider"];
             [values setObject:[NSNumber numberWithInt:sundayTurkey]  forKey:@"Turkey"];
             break;
-        case 1:
+        case 2:
             [values setObject:[NSNumber numberWithInt:mondayFull] forKey:@"Full"];
              [values setObject:[NSNumber numberWithInt:mondaySlider] forKey:@"Slider"];
              [values setObject:[NSNumber numberWithInt:mondayTurkey] forKey:@"Turkey"];
             break;
-        case 2:
+        case 3:
             [values setObject:[NSNumber numberWithInt:tuesdayFull] forKey:@"Full"];
             [values setObject:[NSNumber numberWithInt:tuesdaySlider] forKey:@"Slider"];
             [values setObject:[NSNumber numberWithInt:tuesdayTurkey] forKey:@"Turkey"];
             break;
-        case 3:
+        case 4:
             [values setObject:[NSNumber numberWithInt:wednesdayFull] forKey:@"Full"];
             [values setObject:[NSNumber numberWithInt:wednesdaySlider] forKey:@"Slider"];
             [values setObject:[NSNumber numberWithInt:wednesdayTurkey] forKey:@"Turkey"];
             break;
-        case 4:
+        case 5:
+            
+            
             [values setObject:[NSNumber numberWithInt:thursdayFull] forKey:@"Full"];
             [values setObject:[NSNumber numberWithInt:thursdaySlider] forKey:@"Slider"];
             [values setObject:[NSNumber numberWithInt:thursdayTurkey] forKey:@"Turkey"];
             break;
-        case 5:
+        case 6:
+            
+            
             [values setObject:[NSNumber numberWithInt:fridayFull] forKey:@"Full"];
             [values setObject:[NSNumber numberWithInt:fridaySlider] forKey:@"Slider"];
             [values setObject:[NSNumber numberWithInt:fridayTurkey] forKey:@"Turkey"];
             break;
-        case 6:
+        case 7:
             [values setObject:[NSNumber numberWithInt:saturdayFull] forKey:@"Full"];
             [values setObject:[NSNumber numberWithInt:saturdaySlider] forKey:@"Slider"];
             [values setObject:[NSNumber numberWithInt:saturdayTurkey] forKey:@"Turkey"];

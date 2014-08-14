@@ -80,14 +80,10 @@
        [saveEntries setObject:[PFObject objectWithoutDataWithClassName:@"items"
                                                               objectId:key] forKey:@"item"];
         [saveEntries setObject:[itemsDictionary objectForKey:key] forKey:@"count"];
-   
-       
-   
+
        [saveEntries saveEventually];
 
-       
-     
-       
+   
        
     }
     viewSaved.hidden = NO;
